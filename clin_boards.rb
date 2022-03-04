@@ -1,33 +1,63 @@
-require "json"
+require 'terminal-table'
+require './store.rb'
+require './prompter.rb'
+require_relative 'listTodo'
 
 class ClinBoards
-  def initialize
-    # Complete this
+  include Prompter
+  attr_accessor :store
+  def initialize(store = "store.json")
+    @store = Store.new(store)
+    @list = @store.list
   end
 
   def start
-    # Complete this
+    action = ""
+      welcome_message
+      print_list
+    until action == "exit"
+      action, id = main_menu
+      case action
+      when "create" then create_list
+      when "show" then puts "show"
+      when "update" then puts "update"
+      when "delete" then puts "delete"
+      when "exit" then puts "EXIT!"
+      else
+        puts "Invalid option!"
+      end
+
+    end
+  
   end
-end
 
-def banner
-  print "  ####################################
-  #      Welcome to CLIn Boards      #
-  ####################################\n"
-end
+  def print_list
+    table = Terminal::Table.new
+    table.title = "CLIn Boards"
+    table.headings = ["ID", "Name", "Description", "List(#Cards)"]
+    table.rows = @list.map do |lt|
+      [lt[:id], lt[:name], lt[:description], lt[:lists].map {|el| el[:name]}]
+    end
+    puts table
+  end
 
-def menu
-  print  "Board options: create | show ID | update ID | delete ID\n exit\n"
-  print "> "
-  action = gets.chomp
-end
+  def welcome_message
+    puts "#" * 35
+    puts "#      Welcome to CLIn Boards     #"
+    puts "#" * 35
+  end
 
-store = JSON.parse(File.read("store.json"), { symbolize_names: true })
+  def create_list
+    list_data = list_form  #{name: "", description: ""}
+    p list_data
+    list = ListTodo.new(list_data) # => { name: name, description: description }
+    @store.append_todo(list)
+  end
+
+
+
+end
 
 # get the command-line arguments if neccesary
-# app = ClinBoards.new
-# app.start
-
-banner
-menu
-p store
+app = ClinBoards.new
+app.start
