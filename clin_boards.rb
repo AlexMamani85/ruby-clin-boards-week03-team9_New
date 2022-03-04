@@ -1,6 +1,7 @@
 class ClinBoards
   def initialize
     # Complete this
+    
   end
 
   def start
