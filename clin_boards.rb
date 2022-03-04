@@ -36,7 +36,8 @@ class ClinBoards
     table.title = "CLIn Boards"
     table.headings = ["ID", "Name", "Description", "List(#Cards)"]
     table.rows = @list.map do |lt|
-      [lt[:id], lt[:name], lt[:description], lt[:lists].map {|el| el[:name]}]
+    state_lists = lt[:lists].map {|el| el[:name]}
+      [lt[:id], lt[:name], lt[:description], state_lists.join(",") ]
     end
     puts table
   end
