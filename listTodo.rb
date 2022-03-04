@@ -2,7 +2,7 @@ require "json"
 
 
 class ListTodo
-  attr_accessor  :name, :description
+  attr_accessor  :name, :description, :id
 
   @@id_sequence = 0
   def initialize( list, id: nil)
@@ -10,11 +10,12 @@ class ListTodo
     set_id(id)
     @name = list[:name]
     @description = list[:description]
+    @lists = []
   end
 
 
   def to_json(options = nil)
-    {id: @id, name: @name, description: @description }.to_json
+    {id: @id, name: @name, description: @description, lists: @lists}.to_json
   end
 
 
