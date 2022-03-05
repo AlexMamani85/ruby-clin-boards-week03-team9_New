@@ -2,6 +2,7 @@ require 'terminal-table'
 require './store.rb'
 require './prompter.rb'
 require_relative 'listTodo'
+require_relative 'card'
 
 class ClinBoards
   include Prompter
@@ -15,7 +16,8 @@ class ClinBoards
     action = ""
       welcome_message
       print_list
-    until action == "exit"
+      until action == "exit"
+      puts "Board options: create | show ID | update ID | delete ID | exit"
       action, id = main_menu
       case action
       when "create"
@@ -69,9 +71,17 @@ class ClinBoards
     @store.delete_board(id)
     print_list
   end
+
+  def menu_cards
+    puts "List options: create-list | update-list LISTNAME | delete-list LISTNAME"
+    puts "Card options: create-card | checklist ID | update-card ID | delete-card ID"
+  end
   
   def show_board(id)
     @store.show_board(id)
+    menu_cards
+    new_card = Card.new()
+    new_card.start
   end
 
   

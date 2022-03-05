@@ -1,6 +1,6 @@
 module Prompter
   def main_menu
-    puts "Board options: create | show ID | update ID | delete ID | exit"
+    
     print "> "
     action, id = gets.chomp.split
     [action, id]
