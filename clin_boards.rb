@@ -21,9 +21,9 @@ class ClinBoards
       when "create"
         create_list
         print_list
-      when "show" then puts "show"
-      when "update" then puts "update"
-      when "delete" then puts "delete"
+      when "show" then show_board(id)
+      when "update" then update_list(id)
+      when "delete" then puts delete_board(id)
       when "exit" then puts "EXIT!"
       else
         puts "Invalid option!"
@@ -56,6 +56,23 @@ class ClinBoards
     @store.append_todo({id: list.id, name: list.name, description: list.description, lists: []})
   
   end
+
+  def update_list(id)
+    data = list_form
+    # list y id ok
+    @store.update_list(data,id)
+
+    print_list
+  end 
+  
+  def delete_board(id)
+    @store.delete_board(id)
+  end
+  def show_board(id)
+    @store.show_board(id)
+  end
+
+  
 end
 
 # get the command-line arguments if neccesary
