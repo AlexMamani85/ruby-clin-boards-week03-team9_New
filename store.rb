@@ -6,7 +6,6 @@ class Store
   def initialize(filename)
     @filename = filename
     @list = load_list
-
   end
 
   def load_list
