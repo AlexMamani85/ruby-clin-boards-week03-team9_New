@@ -1,7 +1,7 @@
 require_relative 'prompter'
 require_relative 'store'
 
-class Card
+class CheckList
   include Prompter
 
   def initialize(id = 1, title = "", checkItem = "")
@@ -16,7 +16,7 @@ class Card
       action, id = main_menu
       case action
       when "checklist"
-        checklist(id)
+        show_checklist(id)
       # when "show" then show_board(id)
       # when "update" then update_list(id)
       # when "delete" then puts delete_board(id)
@@ -31,7 +31,7 @@ class Card
 
 
 
-  def checklist(id)
+  def show_checklist(id)
     @list.each do |el|
       if el[:id] == id.to_i
         el[:lists].each do |item|

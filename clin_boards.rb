@@ -2,7 +2,7 @@ require 'terminal-table'
 require './store.rb'
 require './prompter.rb'
 require_relative 'listTodo'
-require_relative 'card'
+require_relative 'checklist'
 
 class ClinBoards
   include Prompter
@@ -80,7 +80,7 @@ class ClinBoards
   def show_board(id)
     @store.show_board(id)
     menu_cards
-    new_card = Card.new()
+    new_card = CheckList.new()
     new_card.start
   end
 
