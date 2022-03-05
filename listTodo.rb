@@ -5,9 +5,11 @@ class ListTodo
   attr_accessor  :name, :description, :id
 
   @@id_sequence = 0
+
   def initialize( list, id: nil)
-    # @id = id
-    set_id(id)
+    @id = id || @@id_sequence.next
+    @@id_sequence = @id
+
     @name = list[:name]
     @description = list[:description]
     @lists = []

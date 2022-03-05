@@ -2,6 +2,7 @@ require 'terminal-table'
 require './store.rb'
 require './prompter.rb'
 require_relative 'listTodo'
+require_relative 'checklist'
 
 class ClinBoards
   include Prompter
@@ -15,15 +16,16 @@ class ClinBoards
     action = ""
       welcome_message
       print_list
-    until action == "exit"
+      until action == "exit"
+      puts "Board options: create | show ID | update ID | delete ID | exit"
       action, id = main_menu
       case action
       when "create"
         create_list
         print_list
-      when "show" then puts "show"
-      when "update" then puts "update"
-      when "delete" then puts "delete"
+      when "show" then show_board(id)
+      when "update" then update_list(id)
+      when "delete" then puts delete_board(id)
       when "exit" then puts "EXIT!"
       else
         puts "Invalid option!"
@@ -56,6 +58,33 @@ class ClinBoards
     @store.append_todo({id: list.id, name: list.name, description: list.description, lists: []})
   
   end
+
+  def update_list(id)
+    data = list_form
+    # list y id ok
+    @store.update_list(data,id)
+
+    print_list
+  end 
+  
+  def delete_board(id)
+    @store.delete_board(id)
+    print_list
+  end
+
+  def menu_cards
+    puts "List options: create-list | update-list LISTNAME | delete-list LISTNAME"
+    puts "Card options: create-card | checklist ID | update-card ID | delete-card ID"
+  end
+  
+  def show_board(id)
+    @store.show_board(id)
+    menu_cards
+    new_card = CheckList.new()
+    new_card.start
+  end
+
+  
 end
 
 # get the command-line arguments if neccesary
