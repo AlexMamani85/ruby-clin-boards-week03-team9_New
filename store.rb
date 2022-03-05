@@ -36,19 +36,30 @@ class Store
   end
 
   def show_board(id)
-    p "def show_board(id)"
-    p id
-    p "def show_board(id)---fin "
-    @list.each do |el| 
+    # p "def show_board(id)"
+    # p id
+    # p "def show_board(id)---fin "
+    @list.each do |el|
       if el[:id] == id.to_i
-          
         el[:lists].each do |item|
           p "-"*20
-          p item[:name] # Todo, In Progress, Code Review, Done  
-          item[:cards].each do |element|
-            p element # TODO's
-            
+          table = Terminal::Table.new
+          table.title = item[:name]
+          table.headings = ["ID", " Title ", "Members ", "Labels", "Due Date ", "Checklist"]
+          table.rows = item[:cards].map do |lt|
+            checkList = lt[:checklist].map do |c|
+              count_incomplete = 0
+              count_complete = 0
+                if c[:completed]
+                  count_incomplete += 1
+                else
+                  count_incomplete += 1
+                end
+                "#{count_incomplete}/#{count_incomplete}"
+              end
+              [lt[:id], lt[:title], lt[:members], lt[:labels], lt[:due_date], checkList]
           end
+          puts table
         end
       end
     end
@@ -75,20 +86,8 @@ class Store
 
 
   def delete_board(id)
-    @list.each do |el| 
-      if el[:id] == id.to_i
-        el.delete(:id)
-        el.delete(:name)
-        el.delete(:description)
-        el.delete(:lists)
-
-
-      end
-    end
-    p "comienza list"
-    p @list
+    @list.select! { |listItem| listItem[:id] != id.to_i }
     File.write(@filename, @list.to_json)
-    p "termina list"
   end
 
   def append_todo(listItem)

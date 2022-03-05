@@ -67,7 +67,9 @@ class ClinBoards
   
   def delete_board(id)
     @store.delete_board(id)
+    print_list
   end
+  
   def show_board(id)
     @store.show_board(id)
   end
