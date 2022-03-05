@@ -11,6 +11,7 @@ module Prompter
     name = gets.chomp
     print "Description: "
     description = gets.chomp
-    { name: name, description: description }
+    return { name: name, description: description } unless name.nil? & description.nil?
+    nil
   end
 end
