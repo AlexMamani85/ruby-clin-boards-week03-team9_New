@@ -54,18 +54,15 @@ class ClinBoards
   def create_list
     list_data = list_form  #{name: "", description: ""}
     list = ListTodo.new(list_data) # => { name: name, description: description }
-    
     @store.append_todo({id: list.id, name: list.name, description: list.description, lists: []})
-  
   end
 
   def update_list(id)
     data = list_form
     # list y id ok
     @store.update_list(data,id)
-
     print_list
-  end 
+  end
   
   def delete_board(id)
     @store.delete_board(id)
@@ -80,8 +77,8 @@ class ClinBoards
   def show_board(id)
     @store.show_board(id)
     menu_cards
-    new_card = CheckList.new()
-    new_card.start
+    new_check = CheckList.new()
+    new_check.start
   end
 
   
