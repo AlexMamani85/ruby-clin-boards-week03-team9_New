@@ -30,17 +30,15 @@ class CheckList
       when "add"
         add_checklist
         show_checklist(1)
-
-        break
       when "toggle"
         toggle(id)
         show_checklist(1)
-      # when "delete" then puts delete_board(id)
+      when "delete"
+        delete_at(id)
+        show_checklist(1)
       when "create-card"
         option = select_table_name
         switch_table(option)
-        break
-
       when "back"
         continue = false
         puts "exit!"
@@ -50,6 +48,21 @@ class CheckList
       end
     end
     continue
+  end
+
+  def delete_at(id = 1,index)
+    @list.each do |el|
+        if el[:id] == id.to_i
+          el[:lists].each do |item|
+            item[:cards].each do |card|
+              if card[:id] == id.to_i
+                count = 0
+                card[:checklist].delete_at(index.to_i)
+            end
+          end
+        end
+      end
+    end
   end
 
   def toggle(id = 1, index)
@@ -101,8 +114,6 @@ class CheckList
   def add_checklist(id = 1)
     print "Title: "
     title = gets.chomp
-
-
     @list.each do |el|
         if el[:id] == id
           el[:lists].each do |item|
@@ -115,7 +126,6 @@ class CheckList
           end
         end
     end
-
   end
 
   def option_menu
