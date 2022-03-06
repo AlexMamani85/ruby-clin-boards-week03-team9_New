@@ -17,19 +17,19 @@ class ClinBoards
       welcome_message
       print_list
       until action == "exit"
-      puts "Board options: create | show ID | update ID | delete ID | exit"
-      action, id = main_menu
-      case action
-      when "create"
-        create_list
-        print_list
-      when "show" then show_board(id)
-      when "update" then update_list(id)
-      when "delete" then puts delete_board(id)
-      when "exit" then puts "EXIT!"
-      else
-        puts "Invalid option!"
-      end
+        puts "Board options: create | show ID | update ID | delete ID | exit"
+        action, id = main_menu
+        case action
+        when "create"
+          create_list
+          print_list
+        when "show" then show_board(id)
+        when "update" then update_list(id)
+        when "delete" then puts delete_board(id)
+        when "exit" then puts "EXIT!"
+        else
+          puts "Invalid option!"
+        end
 
     end
   
@@ -75,10 +75,12 @@ class ClinBoards
   end
   
   def show_board(id)
-    @store.show_board(id)
-    menu_cards
-    new_check = CheckList.new()
-    new_check.start
+    loop do
+      @store.show_board(id)
+      menu_cards
+      new_check = CheckList.new()
+      break unless new_check.start()
+    end
   end
 
   
