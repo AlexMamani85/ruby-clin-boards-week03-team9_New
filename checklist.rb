@@ -4,7 +4,6 @@ require_relative 'store'
 require_relative 'card'
 
 
-
 class CheckList
   include Prompter
   @@id_sequence = 0
@@ -129,8 +128,8 @@ class CheckList
 
   def option_menu
     puts "Checklist options: add | toggle INDEX | delete INDEX"
-    print "checklist 133> "
-    op = gets.chomp
+    # print "checklist 133> "
+    # op = gets.chomp
   end
 
   def select_table_name
