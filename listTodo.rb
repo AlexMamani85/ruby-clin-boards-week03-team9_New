@@ -21,7 +21,7 @@ class ListTodo
   def set_id(id)
     if id.nil?
       @id = (@@id_sequence += 1)
-    elsif @id = id
+    elsif @id == id
       @@id_sequence = id if id > @@id_sequence
     end
   end

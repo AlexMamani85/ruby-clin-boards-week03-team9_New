@@ -20,13 +20,13 @@ class Store
   end
 
   def update_list(list, id)
-    p list[:id]=id.to_i #  no tenia ningun valor list[:id]
+    p list[:id] = id.to_i #  no tenia ningun valor list[:id]
     p list #{ name: name, description: description, id: }
     @list.each do |el|
       if el[:id] == id.to_i
-        el[:name]=list[:name]
-        el[:description]=list[:description]
-        el[:lists]=[]
+        el[:name] = list[:name]
+        el[:description] = list[:description]
+        el[:lists] = []
         p el[:name]
         p el[:description]
       end
@@ -39,22 +39,22 @@ class Store
     @list.each do |el|
       if el[:id] == id.to_i
         el[:lists].each do |item|
-          p "-"*20
+          p "-" * 20
           table = Terminal::Table.new
           table.title = item[:name]
           table.headings = ["ID", " Title ", "Members ", "Labels", "Due Date ", "Checklist"]
           table.rows = item[:cards].map do |lt|
             checkList = lt[:checklist].map do |c|
-              count_incomplete = 0
-              count_complete = 0
+                count_incomplete = 0
+                count_complete = 0
                 if c[:completed]
                   count_complete += 1
                 else
                   count_incomplete += 1
                 end
                 "#{count_complete}/#{count_complete + count_incomplete}"
-              end
-              [lt[:id], lt[:title], lt[:members], lt[:labels], lt[:due_date], checkList]
+            end
+            [lt[:id], lt[:title], lt[:members], lt[:labels], lt[:due_date], checkList]
           end
           puts table
         end

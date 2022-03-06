@@ -134,7 +134,6 @@ class CheckList
         checklist: []
       }
       todo_Card = Card.new(**new_todo)
-      # todo_Card.to_json
       @list.each do |el|
         el[:lists].each do |item|
           if item[:name] == select_name
@@ -145,9 +144,6 @@ class CheckList
       end
       puts @list
       File.write("store.json", @list.to_json)
-
-      # todo_Card.add_todo()
-
     when "In Progress"
       puts "in progresssss :D"
     when "code review"
@@ -162,7 +158,7 @@ class CheckList
   def set_id(id)
     if id.nil?
       @id = (@@id_sequence += 1)
-    elsif @id = id
+    elsif @id == id
       @@id_sequence = id if id > @@id_sequence
     end
   end
