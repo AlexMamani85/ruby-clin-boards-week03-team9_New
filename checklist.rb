@@ -13,6 +13,7 @@ class CheckList
     @title = title
     @checkitem = checkitem
     @list = Store.new("store.json").load_list
+    @store = Store.new("store.json")
   end
 
   def start
@@ -141,6 +142,7 @@ class CheckList
       print "Due Date: "
       date_card = gets.chomp
       new_todo = {
+        id: format('%08x', Time.now.to_i - Time.new(2000).to_i),
         title: title_card,
         members: members_card,
         labels: labels_card,
@@ -157,6 +159,7 @@ class CheckList
         end
       end
       File.write("store.json", @list.to_json)
+      @store.show_board(1)
     when "In Progress"
       puts "in progresssss :D"
     when "code review"
