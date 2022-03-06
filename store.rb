@@ -36,9 +36,6 @@ class Store
   end
 
   def show_board(id)
-    # p "def show_board(id)"
-    # p id
-    # p "def show_board(id)---fin "
     @list.each do |el|
       if el[:id] == id.to_i
         el[:lists].each do |item|
