@@ -1,7 +1,7 @@
 module Prompter
   def main_menu
     
-    print "> "
+    print "prompter 4> "
     action, id = gets.chomp.split
     [action, id]
   end

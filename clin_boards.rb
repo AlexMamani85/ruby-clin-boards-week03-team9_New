@@ -28,7 +28,7 @@ class ClinBoards
         when "delete" then puts delete_board(id)
         when "exit" then puts "EXIT!"
         else
-          puts "Invalid option!"
+          puts "Invalid option!: class ClinBoards: ln:31"
         end
 
     end
@@ -40,7 +40,7 @@ class ClinBoards
     table.title = "CLIn Boards"
     table.headings = ["ID", "Name", "Description", "List(#Cards)"]
     table.rows = @list.map do |lt|
-      [lt[:id], lt[:name], lt[:description], lt[:lists].empty? ? [] : lt[:lists].map {|el| p el[:name]} ]
+      [lt[:id], lt[:name], lt[:description], lt[:lists].empty? ? "" : (lt[:lists].map {|el| p "#{el[:name]} (#{el[:cards].size})"}).join(", ") ]
     end
     puts table
   end

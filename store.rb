@@ -39,20 +39,20 @@ class Store
     @list.each do |el|
       if el[:id] == id.to_i
         el[:lists].each do |item|
-          p "-"*20
           table = Terminal::Table.new
           table.title = item[:name]
           table.headings = ["ID", " Title ", "Members ", "Labels", "Due Date ", "Checklist"]
           table.rows = item[:cards].map do |lt|
-            checkList = lt[:checklist].map do |c|
-              count_incomplete = 0
-              count_complete = 0
+            count_incomplete = 0
+            count_complete = 0
+            checkList=0
+            lt[:checklist].map do |c|
                 if c[:completed]
-                  count_incomplete += 1
-                else
+                  count_complete += 1
+                elsif !c[:completed]
                   count_incomplete += 1
                 end
-                "#{count_incomplete}/#{count_incomplete}"
+                checkList = "#{count_complete}/#{count_incomplete+count_complete}"
               end
               [lt[:id], lt[:title], lt[:members], lt[:labels], lt[:due_date], checkList]
           end

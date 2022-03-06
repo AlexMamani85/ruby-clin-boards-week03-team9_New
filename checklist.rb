@@ -44,7 +44,7 @@ class CheckList
         puts "exit!"
         break
       else
-        puts "Invalid option!"
+        puts "Invalid option!: class CheckList: ln: 47"
       end
     end
     continue
@@ -99,7 +99,8 @@ class CheckList
               count = 0
               # bug en el contador de la lista
               lt[:checklist].each do |item|
-                puts "[#{item[:completed] == true ? "x" : " "}] #{count + 1}.- #{item[:title]} "
+                count+=1
+                puts "[#{item[:completed] == true ? "x" : " "}] #{count}.- #{item[:title]} "
               end
             end
           end
@@ -107,7 +108,7 @@ class CheckList
       end
     end
     puts "-------------------------------------"
-    puts option_menu
+    option_menu
   end
 
 
@@ -130,14 +131,14 @@ class CheckList
 
   def option_menu
     puts "Checklist options: add | toggle INDEX | delete INDEX"
-    print "> "
+    print "checklist 133> "
     op = gets.chomp
   end
 
   def select_table_name
     puts "Select the list: "
     puts "Todo | In Progress | Code Review | Done"
-    print "> "
+    print "checklist 140> "
     op_card = gets.chomp
     op_card
   end
@@ -184,7 +185,7 @@ class CheckList
     when "done"
       puts "Done"
     else
-      puts "invalid option"
+      puts "invalid option: class CheckList: ln: 187"
     end
   end
 
