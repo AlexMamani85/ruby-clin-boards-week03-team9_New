@@ -18,9 +18,7 @@ class CheckList
   end
 
   def start()
-
     continue = true
-
     action = ""
     loop do
       action, id = main_menu
