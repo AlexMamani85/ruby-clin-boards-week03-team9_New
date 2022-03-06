@@ -1,7 +1,6 @@
 module Prompter
   def main_menu
-    
-    print "prompter 4> "
+    print "> "
     action, id = gets.chomp.split
     [action, id]
   end
@@ -12,6 +11,7 @@ module Prompter
     print "Description: "
     description = gets.chomp
     return { name: name, description: description } unless name.nil? & description.nil?
+
     nil
   end
 end
