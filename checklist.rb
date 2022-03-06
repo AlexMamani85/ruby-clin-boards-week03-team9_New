@@ -128,8 +128,6 @@ class CheckList
 
   def option_menu
     puts "Checklist options: add | toggle INDEX | delete INDEX"
-    # print "checklist 133> "
-    # op = gets.chomp
   end
 
   def select_table_name
