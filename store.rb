@@ -1,6 +1,6 @@
-require 'terminal-table'
-require 'json'
-require './prompter.rb'
+require "terminal-table"
+require "json"
+require "./prompter"
 
 class Store
   include Prompter
@@ -21,8 +21,8 @@ class Store
 
   def update_list(list, id)
     p list[:id]=id.to_i #  no tenia ningun valor list[:id]
-    p list #{ name: name, description: description, id: } 
-    @list.each do |el| 
+    p list #{ name: name, description: description, id: }
+    @list.each do |el|
       if el[:id] == id.to_i
         el[:name]=list[:name]
         el[:description]=list[:description]
@@ -32,7 +32,7 @@ class Store
       end
     end
     File.write(@filename, @list.to_json)
-    # p @list :  verificar valores modificados 
+    # p @list :  verificar valores modificados
   end
 
   def show_board(id)
@@ -48,11 +48,11 @@ class Store
               count_incomplete = 0
               count_complete = 0
                 if c[:completed]
-                  count_incomplete += 1
+                  count_complete += 1
                 else
                   count_incomplete += 1
                 end
-                "#{count_incomplete}/#{count_incomplete}"
+                "#{count_complete}/#{count_complete + count_incomplete}"
               end
               [lt[:id], lt[:title], lt[:members], lt[:labels], lt[:due_date], checkList]
           end
@@ -60,27 +60,7 @@ class Store
         end
       end
     end
-
-    # Todo
-    # In Progress
-    # Code Review
-    # ID Title Members Labels Due_Date Checklist
-
-
-    # table = Terminal::Table.new
-    # table.title = "CLIn Boards"
-    # table.headings = ["ID", "Name", "Description", "List(#Cards)"]
-    # table.rows = @list.map do |lt|
-    #   [lt[:id], lt[:name], lt[:description], lt[:lists].empty? ? [] : lt[:lists].map {|el| p el[:name]} ]
-    # end
-    # puts table
-
-
-
-
-
   end
-
 
   def delete_board(id)
     @list.select! { |listItem| listItem[:id] != id.to_i }
@@ -91,5 +71,4 @@ class Store
     @list << listItem
     File.write(@filename, @list.to_json)
   end
-
 end
